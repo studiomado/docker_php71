@@ -1,7 +1,8 @@
-FROM centos:centos6.8
+FROM centos:centos6
 
 MAINTAINER alessandro.minoccheri@studiomado.it
 
+RUN yum -y update
 RUN yum install -y epel-release
 RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 RUN rpm -Uvh https://mirror.webtatic.com/yum/el6/latest.rpm
@@ -22,6 +23,12 @@ php71w-simplexml \
 php71w-curl \
 php71w-mysqlnd \
 php71w-pecl-imagick
+
+RUN sed -e 's/127.0.0.1:9000/0.0.0.0:9000/' \
+        -e '/allowed_clients/d' \
+        -e '/catch_workers_output/s/^;//' \
+        -e '/error_log/d' \
+        -i /etc/php-fpm.d/www.conf
 
 EXPOSE 9000
 

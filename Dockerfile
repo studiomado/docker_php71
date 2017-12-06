@@ -24,10 +24,14 @@ php71w-curl \
 php71w-mysqlnd \
 php71w-pecl-imagick
 
+RUN touch /var/log/www.access.log
+
 RUN sed -e 's/127.0.0.1:9000/0.0.0.0:9000/' \
         -e '/allowed_clients/d' \
         -e '/catch_workers_output/s/^;//' \
         -e '/error_log/d' \
+        -e 's/;access.log = /access.log = \/var\//' \
+        -e 's/;security.limit_extensions = .php .php3 .php4 .php5 .php7/security.limit_extensions = .php .php3 .php4 .php5 .php7/' \
         -i /etc/php-fpm.d/www.conf
 
 EXPOSE 9000

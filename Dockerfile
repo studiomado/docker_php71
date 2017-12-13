@@ -23,7 +23,7 @@ php71w-simplexml \
 php71w-curl \
 php71w-mysqlnd \
 php71w-pecl-imagick \
-mysqlclient
+mysql
 
 RUN cd /tmp && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 

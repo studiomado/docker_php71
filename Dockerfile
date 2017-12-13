@@ -22,7 +22,10 @@ php71w-xmlrpc \
 php71w-simplexml \
 php71w-curl \
 php71w-mysqlnd \
-php71w-pecl-imagick
+php71w-pecl-imagick \
+mysqlclient
+
+RUN cd /tmp && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
 RUN touch /var/log/www.access.log
 
